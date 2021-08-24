@@ -156,6 +156,14 @@ extension AVAsset {
         self.player.pause()
     }
     
+    open func stop() {
+        self.player.pause()
+        if let currentItem = self.player.currentItem {
+            self.removePlayerItemObservers(fromPlayerItem: currentItem)
+        }
+        self.player.replaceCurrentItem(with: nil)
+    }
+    
     // MARK: - Lifecycle
 
     override public convenience init() {
